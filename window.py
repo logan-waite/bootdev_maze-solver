@@ -1,4 +1,5 @@
 from tkinter import Tk, BOTH, Canvas
+from consts import BG_COLOR
 
 class Window:
     def __init__(self, width, height):
@@ -6,8 +7,8 @@ class Window:
         self.height = height
         self.__root = Tk()
         self.__root.title = "Maze Solver"
-        self.canvas = Canvas()
-        self.canvas.pack()
+        self.canvas = Canvas(bg=BG_COLOR)
+        self.canvas.pack(fill=BOTH, expand=True)
         self.running = False
         
         self.__root.protocol("WM_DELETE_WINDOW", self.close)

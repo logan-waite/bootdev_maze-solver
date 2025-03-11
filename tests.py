@@ -7,7 +7,8 @@ class TestMaze(unittest.TestCase):
     def test_create_cells(self):
         num_cols = 12
         num_rows = 10
-        m1 = Maze(0, 0, num_rows, num_cols, 10, 10)
+        cell_size = 10
+        m1 = Maze(0, 0, num_rows, num_cols, cell_size, cell_size)
         self.assertEqual(len(m1._cells), num_rows * num_cols)
 
     def test_cells_are_spaced_correctly(self):
@@ -39,6 +40,17 @@ class TestMaze(unittest.TestCase):
         self.assertEqual(cell4._y1, 15)
         self.assertEqual(cell4._x2, 25)
         self.assertEqual(cell4._y2, 25)
+
+    def test_break_entrance_and_exit(self):
+        num_cols = 4
+        num_rows = 4
+        cell_size = 10
+        m = Maze(0, 0, num_cols, num_rows, cell_size, cell_size) 
+        m._break_entrance_and_exit()
+        entrance_cell = m._cells[0]
+        exit_cell = m._cells[-1]
+        self.assertTrue(entrance_cell.has_left_wall is False or entrance_cell.has_top_wall is False)
+        self.assertTrue(exit_cell.has_right_wall is False or exit_cell.has_bottom_wall is False)
 
 
 class TestCell(unittest.TestCase):

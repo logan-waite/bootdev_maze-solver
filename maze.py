@@ -1,4 +1,5 @@
 import time
+import random
 from cell import Cell
 
 class Maze:
@@ -28,11 +29,31 @@ class Maze:
                     )
                 )
         
-        for cell in self._cells:
-            if self.window:
+        if self.window:
+            for cell in self._cells:
                 cell.draw()
                 self._animate()
+            self._break_entrance_and_exit()
 
     def _animate(self):
         self.window.redraw()
         time.sleep(0.05)
+
+    def _break_entrance_and_exit(self):
+        entrance_cell = self._cells[0]
+        exit_cell = self._cells[-1]
+
+        if random.randint(0, 1):
+            entrance_cell.has_left_wall = False
+        else:
+            entrance_cell.has_top_wall = False
+
+        if random.randint(0, 1):
+            exit_cell.has_right_wall = False
+        else:
+            exit_cell.has_bottom_wall = False
+
+        if self.window:
+            entrance_cell.draw()
+            exit_cell.draw()
+
