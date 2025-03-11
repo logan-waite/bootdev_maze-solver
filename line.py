@@ -6,6 +6,9 @@ class Point:
     def __repr__(self):
         return f"({self.x}, {self.y})"
 
+    def __eq__(self, o):
+        return self.x == o.x and self.y == o.y
+
 
 class Line:
     def __init__(self, start, end):
