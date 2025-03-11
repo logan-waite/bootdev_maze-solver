@@ -3,11 +3,9 @@ from consts import BG_COLOR
 
 class Window:
     def __init__(self, width, height):
-        self.width = width
-        self.height = height
         self.__root = Tk()
         self.__root.title = "Maze Solver"
-        self.canvas = Canvas(bg=BG_COLOR)
+        self.canvas = Canvas(self.__root, bg=BG_COLOR, height=height, width=width)
         self.canvas.pack(fill=BOTH, expand=True)
         self.running = False
         

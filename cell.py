@@ -2,7 +2,7 @@ from consts import BG_COLOR
 from line import Point, Line
 
 class Cell:
-    def __init__(self, x1, y1, x2, y2, window = None):
+    def __init__(self, x1, y1, x2, y2, index, window = None):
         self._x1 = x1
         self._y1 = y1
         self._x2 = x2
@@ -11,9 +11,12 @@ class Cell:
         self.has_right_wall = True
         self.has_top_wall= True
         self.has_bottom_wall = True
+        self.row_idx = index[0]
+        self.col_idx = index[1]
         self.window = window
 
         self.center = Point(((x2 - x1) / 2) + x1, ((y2 - y1) / 2) + y1)
+        self.visited = False
 
     def draw(self):
         visible = "white"
@@ -34,3 +37,7 @@ class Cell:
     def draw_move(self, to_cell, undo=False):
         line = Line(self.center, to_cell.center)
         self.window.draw_line(line, "gray" if undo else "red")
+
+
+    def __repr__(self):
+        return f"Cell(index=[{self.row_idx}][{self.col_idx}], visited={self.visited})"
